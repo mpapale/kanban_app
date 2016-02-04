@@ -1,4 +1,5 @@
 I'm messing with webpack
 
-I'm currently here http://survivejs.com/webpack_react/developing_with_webpack/
-at the "Refreshing CSS" section
+I finished this chapter http://survivejs.com/webpack_react/developing_with_webpack/
+
+Starting this one: http://survivejs.com/webpack_react/webpack_and_react/
