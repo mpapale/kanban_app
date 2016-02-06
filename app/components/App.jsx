@@ -32,7 +32,7 @@ export default class App extends React.Component {
 			<div>
 				<button onClick={this.addNote}>+</button>
 				{/* this is a comment */}
-				<Notes notes={notes} />
+				<Notes notes={notes} onEdit={this.editNode}/>
 			</div>
 		);
 	}
@@ -60,5 +60,17 @@ export default class App extends React.Component {
 	        	task: 'New task'
 	      	}])
 	    });
+	};
+
+	editNode = (id, task) => {
+		const notes = this.state.notes.map(note => {
+			// Mpapale: A strange use of `map`
+			if (note.id === id && task) {
+				note.task = task;
+			}
+			return note;
+		});
+
+		this.setState({notes});
 	};
 }
