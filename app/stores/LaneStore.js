@@ -19,6 +19,24 @@ class LaneStore {
 		});
 	}
 
+	update(updatedLane) {
+		const lanes = this.lanes.map(lane => {
+			if (lane.id === updatedLane.id) {
+				return Object.assign({}, lane, updatedLane);
+			}
+			return lane;
+		});
+		this.setState({lanes});
+	}
+
+	delete(id) {
+		// NB: really this should reap the notes too...
+		// There is a leak right now
+		this.setState({
+			lanes: this.lanes.filter(lane => lane.id !== id)
+		});
+	}
+
 	attachToLane({laneId, noteId}) {
 		// mpapale: Usually I prefer findById and update
 		// instead of full map.
