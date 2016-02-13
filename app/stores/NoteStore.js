@@ -7,6 +7,12 @@ class NoteStore {
 		this.bindActions(NoteActions);
 
 		this.notes = [];
+
+		// Magic to ensure certain methods are not
+		// mixed in and wrapped by `alt.createStore`
+		this.exportPublicMethods({
+			getNotesByIds: this.getNotesByIds.bind(this)
+		});
 	}
 
 	create(note) {
@@ -17,6 +23,8 @@ class NoteStore {
 		this.setState({
 			notes: notes.concat(note)
 		});
+
+		return note;
 	}
 
 	update(updatedNote) {
@@ -44,6 +52,25 @@ class NoteStore {
 		this.setState({
 			notes: this.notes.filter(note => note.id !== id)
 		});
+	}
+
+	// Public (non-action-bound) methods
+	// Aside: I find this weird, since views now seem to access
+	// Actions as well as the Store. It feels like you might
+	// only want it to generate Actions....
+	getNotesByIds(ids) {
+		// 1. Make sure we are operating on an array and
+		// map over the ids
+		// [id, id, id, ...] -> [[Note], [], [Note], ...]
+		return (ids || []).map(
+			// 2. Extract matching notes
+			// [Note, Note, Note] -> [Note, ...] (match) or [] (no match)
+			//
+			// mpapale: wtf, this should just be findById
+			id => this.notes.filter(note => note.id === id)
+		// 3. Filter out possible empty arrays and get notes
+		// [[Note], [], [Note]] -> [[Note], [Note]] -> [Note, Note]
+		).filter(a => a.length).map(a => a[0]); // mpapale: gross dude
 	}
 }
 
