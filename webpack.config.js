@@ -1,6 +1,7 @@
 const path = require('path');
 const merge = require('webpack-merge');
 const webpack = require('webpack');
+const NyanProgressPlugin = require('nyan-progress-webpack-plugin');
 
 const TARGET = process.env.npm_lifecycle_event;
 const PATHS = {
@@ -75,7 +76,12 @@ if (TARGET === 'start' || !TARGET) {
 		},
 
 		plugins: [
-			new webpack.HotModuleReplacementPlugin()
+			new webpack.HotModuleReplacementPlugin(),
+      new NyanProgressPlugin({
+        nyanCatSays: function(progress, messages) {
+          return (progress === 1 && 'YOU ARE A NERD') || '...';
+        }
+      })
 		]
 	});
 }
