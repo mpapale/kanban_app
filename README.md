@@ -8,4 +8,4 @@ and this one http://survivejs.com/webpack_react/from_notes_to_kanban/
 
 In the last section, the interaction of editing became a little weird. Not sure if I have a small bug somewhere or if this is how the code quiesces.
 
-I am here: http://survivejs.com/webpack_react/implementing_dnd/
+I am here: http://survivejs.com/webpack_react/implementing_dnd/#setting-up-note-dragsource-
