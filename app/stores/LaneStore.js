@@ -44,6 +44,11 @@ class LaneStore {
 		// But maybe this full map helps with setState;
 		// findById would be an optimization.
 		const lanes = this.lanes.map(lane => {
+
+			if (lane.notes.includes(noteId)) {
+				lane.notes = lane.notes.filter(note => note !== noteId);
+			}
+			
 			if (lane.id === laneId) {
 				if (lane.notes.includes(noteId)) {
 					console.warn('Already attached note to lane', lanes);
