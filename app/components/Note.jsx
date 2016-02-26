@@ -39,10 +39,12 @@ export default class Note extends React.Component {
 			connectDropTarget,
 			isDragging,
 			onMove,
-			id, 
+			id,
+			editing,
 			...props} = this.props;
+		const dragSource = editing ? a => a : connectDragSource;
 
-		return connectDragSource(connectDropTarget(
+		return dragSource(connectDropTarget(
 			<li style={{
 				opacity: isDragging ? 0 : 1
 			}} {...this.props}>{props.children}</li>
