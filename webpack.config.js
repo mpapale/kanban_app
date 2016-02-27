@@ -133,7 +133,7 @@ if (TARGET === 'build' || TARGET === 'stats') {
       loaders: [
         // Extract CSS during build
         {
-          text: /\.css$/,
+          test: /\.css$/,
           loader: ExtractTextPlugin.extract('style', 'css'),
           include: PATHS.app
         }
