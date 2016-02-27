@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const NpmInstallPlugin = require('npm-install-webpack-plugin');
 const NyanProgressPlugin = require('nyan-progress-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanPlugin = require('clean-webpack-plugin');
 
 // Load *package.json* so we can use `dependencies` from there
 const pkg = require('./package.json');
@@ -123,6 +124,7 @@ if (TARGET === 'build') {
     },
 
     plugins: [
+      new CleanPlugin([PATHS.build]),
       // Extract vendor manifest files
       new webpack.optimize.CommonsChunkPlugin({
         names: ['vendor', 'manifest']
