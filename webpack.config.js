@@ -3,6 +3,7 @@ const merge = require('webpack-merge');
 const webpack = require('webpack');
 const NpmInstallPlugin = require('npm-install-webpack-plugin');
 const NyanProgressPlugin = require('nyan-progress-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // Load *package.json* so we can use `dependencies` from there
 const pkg = require('./package.json');
@@ -54,7 +55,16 @@ const common = {
   			include: PATHS.app
   		}
   	]
-  }
+  },
+
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'node_modules/html-webpack-template/index.ejs',
+      title: 'Kanban app',
+      appMountId: 'app',
+      inject: false
+    })
+  ]
 };
 
 if (TARGET === 'start' || !TARGET) {
@@ -62,8 +72,6 @@ if (TARGET === 'start' || !TARGET) {
 		devtool: 'eval-source-map',
 
 		devServer: {
-			contentBase: PATHS.build,
-
 			// Enable history API fallback so HTML5 History API based
 			// routing works. This is a good default that will come
 			// in handy in more complicated setups.
@@ -87,6 +95,9 @@ if (TARGET === 'start' || !TARGET) {
         nyanCatSays: function(progress, messages) {
           return (progress === 1 && 'YOU ARE A NERD') || '...';
         }
+      }),
+      new NpmInstallPlugin({
+        save: true
       })
 		]
 	});
