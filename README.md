@@ -6,7 +6,21 @@ and this one: http://survivejs.com/webpack_react/implementing_notes/
 and this one http://survivejs.com/webpack_react/react_and_flux/
 and this one http://survivejs.com/webpack_react/from_notes_to_kanban/
 and this one http://survivejs.com/webpack_react/implementing_dnd/
+and this one http://survivejs.com/webpack_react/building_kanban/
+
+I am here: http://survivejs.com/webpack_react/testing_react/
 
 
-I am here: http://survivejs.com/webpack_react/building_kanban/#deployment
-(the built index.html does not seem to be working... how do i debug this...?)
+# How to run
+
+Run in debug/watch mode:
+
+```
+npm start
+```
+
+Build for "production":
+
+```
+npm run build
+```
